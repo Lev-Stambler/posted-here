@@ -225,7 +225,7 @@ server.on('error', console.error);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ubuntu/code/current/posted-here/postedhere/apps/api/src/main.ts */"./apps/api/src/main.ts");
+module.exports = __webpack_require__(/*! /home/ubuntu/code/current/posted-here/apps/api/src/main.ts */"./apps/api/src/main.ts");
 
 
 /***/ }),
