@@ -1,11 +1,15 @@
-interface Person {
+import * as mongoose from 'mongoose'
+
+export interface PersonAvailability {
   name: string;
+  startTime: Date;
+  endTime: Date;
 }
 
-export interface MarkerInfo {
+export interface MarkerInfo extends mongoose.Document {
   lat: number;
   lng: number;
-  people: Person[];
+  people: PersonAvailability[];
 }
 
 export interface Message {
