@@ -119,7 +119,7 @@ const NewMarkerPopup = (props: {
   );
 };
 
-const MapWithAMarker = withScriptjs(
+const MapWithAMarker = withScriptjs<any>(
   withGoogleMap((props) => {
     const [markers, setMarkers] = useState<MarkerInfo[]>([]);
     const [newMarkerVis, setNewMarkerVis] = useState(false);
