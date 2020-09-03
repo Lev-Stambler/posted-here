@@ -45,7 +45,7 @@ app.post('/api_v1/marker', async (req, res, next) => {
   res.status(204).json({})
 })
 
-const port = process.env.port || 3333;
+const port = process.env.PORT || process.env.port || 3333;
 const server = app.listen(port, () => {
   console.log('Listening at http://localhost:' + port + '/api');
 });
