@@ -11,6 +11,7 @@ import {
   GetAllMarkers,
 } from '@postedhere/api-interfaces';
 import { overlayStyle, inputWrapperStyle } from './app-styles';
+import { environment } from '../environments/environment';
 
 function dateFromTime(time: string) {
   console.log(time);
@@ -26,6 +27,8 @@ function dateFromTime(time: string) {
 
   return date;
 }
+
+const baseUrl = environment
 
 function timeFromDate(date: Date) {
   function twoLong(n: number) {
@@ -44,7 +47,7 @@ const NewMarkerPopup = (props: {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   async function onSubmit() {
-    const ret = await fetch('http://localhost:3333/api_v1/marker', {
+    const ret = await fetch(`${baseUrl}/marker`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -132,7 +135,7 @@ const MapWithAMarker = withScriptjs<any>(
       // setMarkers([...markers, { lat, lng, people: [{ name: 'Lev' }] }]);
     }
     useEffect(() => {
-      fetch('http://localhost:3333/api_v1/all-markers').then(async (ret) => {
+      fetch(`${baseUrl}/all-markers`).then(async (ret) => {
         const body = (await ret.json()) as GetAllMarkers;
         setMarkers(body.markerInfos);
       });

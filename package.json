@@ -39,7 +39,8 @@
     "mongoose": "^5.10.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-google-maps": "^9.4.5"
+    "react-google-maps": "^9.4.5",
+    "tslib": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
