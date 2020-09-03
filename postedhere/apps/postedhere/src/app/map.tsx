@@ -5,24 +5,58 @@ import {
   withScriptjs,
   withGoogleMap,
 } from 'react-google-maps';
+import { MarkerInfo } from '@postedhere/api-interfaces';
+import { overlayStyle, inputWrapperStyle } from './app-styles';
+
+const NewMarkerPopup = (props: { vis: boolean, lat: number, lng: number }) => {
+  
+  async function onSubmit() {
+    fetch('/new')
+  }
+
+  return (
+    <div style={{ display: `${props.vis ? 'grid' : 'none'}`, ...overlayStyle }} >
+      <div className="modal" style={{background: 'white', padding: '2rem', display: 'grid', justifyContent: 'start'}}>
+        <p></p>
+        <div style={inputWrapperStyle}>
+          <input type="text" name="" id="" placeholder="An identifiable name"/>
+        </div>
+        <div style={inputWrapperStyle}>
+          <label htmlFor="">Availability start time </label>
+          <input type="time" name="" id="" placeholder=""/>
+        </div>
+        <div style={inputWrapperStyle}>
+          <label htmlFor="">Availability end time </label>
+          <input type="time" name="" id="" placeholder=""/>
+        </div>
+        <input type="button" value="Post here!" onClick={() => onSubmit()}/>
+      </div>
+    </div>
+  );
+};
 
 const MapWithAMarker = withScriptjs(
   withGoogleMap((props) => {
-    const [markers, setMarkers] = useState<{lat: number, lng: number}[]>([]);
+    const [markers, setMarkers] = useState<MarkerInfo[]>([]);
+    const [newMarkerVis, setNewMarkerVis] = useState(false);
+    const [lat, setLat] = useState(0);
+    const [lng, setLng] = useState(0);
     function onMarkerClick(e) {
-      const lat = e.latLng.lat();
-      const lng = e.latLng.lng();
-      setMarkers([...markers, {lat, lng}])
+      setLat(e.latLng.lat());
+      setLng(e.latLng.lng());
+      setNewMarkerVis(true);
+      // setMarkers([...markers, { lat, lng, people: [{ name: 'Lev' }] }]);
     }
     return (
       <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{ lat: -34.397, lng: 150.644 }}
+        defaultZoom={18}
+        defaultCenter={{ lat: 40.4427, lng: -79.943 }}
         onClick={onMarkerClick}
       >
-        {
-          markers.map(marker => <Marker position={{lat: marker.lat, lng: marker.lng}} />)
-        }
+        <NewMarkerPopup vis={newMarkerVis, lat, lng} />
+        {markers.map((marker) => (
+          <Marker position={{ lat: marker.lat, lng: marker.lng }} />
+        ))}
         {/* <Marker position={{ lat: -34.397, lng: 150.644 }} /> */}
       </GoogleMap>
     );
