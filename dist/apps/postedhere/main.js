@@ -74,11 +74,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_google_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-google-maps */ "../../../node_modules/react-google-maps/lib/index.js");
 /* harmony import */ var react_google_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_google_maps__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _app_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app-styles */ "./app/app-styles.tsx");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ "./environments/environment.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -98,6 +100,8 @@ function dateFromTime(time) {
   return date;
 }
 
+const baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
+
 function timeFromDate(date) {
   function twoLong(n) {
     return n < 10 ? `0${n}` : `${n}`;
@@ -112,7 +116,7 @@ const NewMarkerPopup = props => {
   const [endTime, setEndTime] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Date());
 
   async function onSubmit() {
-    const ret = await fetch('http://localhost:3333/api_v1/marker', {
+    const ret = await fetch(`${baseUrl}/marker`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -199,7 +203,7 @@ const MapWithAMarker = Object(react_google_maps__WEBPACK_IMPORTED_MODULE_1__["wi
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    fetch('http://localhost:3333/api_v1/all-markers').then(async ret => {
+    fetch(`${baseUrl}/all-markers`).then(async ret => {
       const body = await ret.json();
       setMarkers(body.markerInfos);
     });
@@ -246,6 +250,25 @@ const GoogleMapCustom = props => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GoogleMapCustom);
+
+/***/ }),
+
+/***/ "./environments/environment.ts":
+/*!*************************************!*\
+  !*** ./environments/environment.ts ***!
+  \*************************************/
+/*! exports provided: environment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
+// This file can be replaced during build by using the `fileReplacements` array.
+// When building for production, this file is replaced with `environment.prod.ts`.
+const environment = {
+  baseUrl: 'http://localhost:3333/api_v1',
+  production: false
+};
 
 /***/ }),
 

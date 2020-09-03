@@ -81,45 +81,41 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
-/******/ ({
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
 
-/***/ "./apps/api/src/app/models/availability-model.ts":
-/*!*******************************************************!*\
-  !*** ./apps/api/src/app/models/availability-model.ts ***!
-  \*******************************************************/
-/*! exports provided: Availability */
+module.exports = require("mongoose");
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("tslib");
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Availability", function() { return Availability; });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ "mongoose");
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-const availSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"]({
-    name: { type: String, required: true },
-    startTime: { type: Date, required: true },
-    endTime: { type: Date, require: true },
-});
-const Availability = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('Availability', availSchema);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+const environment = {
+    production: true,
+    DB_USER: 'backend-prod',
+    DB_PASSWORD: 'Q46XSpzmzufHocWG',
+};
 
 
 /***/ }),
-
-/***/ "./apps/api/src/app/models/markers-model.ts":
-/*!**************************************************!*\
-  !*** ./apps/api/src/app/models/markers-model.ts ***!
-  \**************************************************/
-/*! exports provided: Marker */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Marker", function() { return Marker; });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ "mongoose");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Marker; });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
 
 const markerSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"]({
@@ -131,47 +127,65 @@ const Marker = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('Marker', markerSc
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
-/***/ "./apps/api/src/environments/environment.ts":
-/*!**************************************************!*\
-  !*** ./apps/api/src/environments/environment.ts ***!
-  \**************************************************/
-/*! exports provided: environment */
+module.exports = require("body-parser");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-const environment = {
-    DB_USER: 'backend-dev',
-    DB_PASSWORD: 'EMRBrsF7Hp8iWo3N',
-    production: false,
-};
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Availability; });
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
+
+const availSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"]({
+    name: { type: String, required: true },
+    startTime: { type: Date, required: true },
+    endTime: { type: Date, require: true },
+});
+const Availability = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('Availability', availSchema);
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports) {
 
-/***/ "./apps/api/src/main.ts":
-/*!******************************!*\
-  !*** ./apps/api/src/main.ts ***!
-  \******************************/
-/*! no exports provided */
+module.exports = require("cors");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "tslib");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tslib__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! express */ "express");
+/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mongoose */ "mongoose");
+/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./apps/api/src/environments/environment.ts");
-/* harmony import */ var _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/models/markers-model */ "./apps/api/src/app/models/markers-model.ts");
-/* harmony import */ var _app_models_availability_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/models/availability-model */ "./apps/api/src/app/models/availability-model.ts");
-/* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! body-parser */ "body-parser");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _app_models_availability_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
+/* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4);
 /* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(body_parser__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! cors */ "cors");
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7);
 /* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_7__);
 
 
@@ -184,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * MONGO Connection
  */
-mongoose__WEBPACK_IMPORTED_MODULE_2__["connect"](`mongodb+srv://${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].DB_USER}:${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].DB_PASSWORD}@cluster0.bfyql.mongodb.net/development?retryWrites=true&w=majority`);
+mongoose__WEBPACK_IMPORTED_MODULE_2__["connect"](`mongodb+srv://${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_USER}:${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_PASSWORD}@cluster0.bfyql.mongodb.net/development?retryWrites=true&w=majority`);
 const db = mongoose__WEBPACK_IMPORTED_MODULE_2__["connection"];
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -197,15 +211,15 @@ app.use(body_parser__WEBPACK_IMPORTED_MODULE_6__["urlencoded"]({ extended: false
 app.use(body_parser__WEBPACK_IMPORTED_MODULE_6__["json"]());
 app.use(cors__WEBPACK_IMPORTED_MODULE_7__());
 app.get('/api_v1/all-markers', (req, res, next) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(void 0, void 0, void 0, function* () {
-    const markers = yield _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__["Marker"].find({}).populate('availabilities');
+    const markers = yield _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__[/* Marker */ "a"].find({}).populate('availabilities');
     res.status(200).json({
         markerInfos: markers
     });
 }));
 app.post('/api_v1/marker', (req, res, next) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(void 0, void 0, void 0, function* () {
     const newMarkerBody = req.body.info;
-    const newAvails = yield _app_models_availability_model__WEBPACK_IMPORTED_MODULE_5__["Availability"].create(newMarkerBody.availabilities);
-    const newMarker = new _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__["Marker"](Object.assign(Object.assign({}, newMarkerBody), { availabilities: newAvails.map(avail => avail._id) }));
+    const newAvails = yield _app_models_availability_model__WEBPACK_IMPORTED_MODULE_5__[/* Availability */ "a"].create(newMarkerBody.availabilities);
+    const newMarker = new _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__[/* Marker */ "a"](Object.assign(Object.assign({}, newMarkerBody), { availabilities: newAvails.map(avail => avail._id) }));
     yield newMarker.save();
     res.status(204).json({});
 }));
@@ -216,74 +230,6 @@ const server = app.listen(port, () => {
 server.on('error', console.error);
 
 
-/***/ }),
-
-/***/ 0:
-/*!************************************!*\
-  !*** multi ./apps/api/src/main.ts ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! /home/ubuntu/code/current/posted-here/apps/api/src/main.ts */"./apps/api/src/main.ts");
-
-
-/***/ }),
-
-/***/ "body-parser":
-/*!******************************!*\
-  !*** external "body-parser" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-
-/***/ "cors":
-/*!***********************!*\
-  !*** external "cors" ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("cors");
-
-/***/ }),
-
-/***/ "express":
-/*!**************************!*\
-  !*** external "express" ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
-
-/***/ "mongoose":
-/*!***************************!*\
-  !*** external "mongoose" ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("mongoose");
-
-/***/ }),
-
-/***/ "tslib":
-/*!************************!*\
-  !*** external "tslib" ***!
-  \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("tslib");
-
 /***/ })
-
-/******/ })));
+/******/ ])));
 //# sourceMappingURL=main.js.map

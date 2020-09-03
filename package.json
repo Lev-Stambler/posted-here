@@ -9,6 +9,7 @@
   "scripts": {
     "nx": "nx",
     "start": "node dist/apps/api/main.js",
+    "deploy": "nx build api --prod && git add . && git commit -m 'deploy' && git push",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
