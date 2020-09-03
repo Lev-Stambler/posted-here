@@ -28,7 +28,7 @@ function dateFromTime(time: string) {
   return date;
 }
 
-const baseUrl = environment
+const baseUrl = environment.baseUrl;
 
 function timeFromDate(date: Date) {
   function twoLong(n: number) {
