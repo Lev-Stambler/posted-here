@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 
-export interface PersonAvailability {
+export interface PersonAvailability extends mongoose.Document {
   name: string;
   startTime: Date;
   endTime: Date;
@@ -9,7 +9,7 @@ export interface PersonAvailability {
 export interface MarkerInfo extends mongoose.Document {
   lat: number;
   lng: number;
-  people: PersonAvailability[];
+  availabilities: PersonAvailability[] | string[] | mongoose.Schema.Types.ObjectId[];
 }
 
 export interface Message {

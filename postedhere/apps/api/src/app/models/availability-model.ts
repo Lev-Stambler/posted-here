@@ -7,5 +7,4 @@ const availSchema = new mongoose.Schema({
   endTime: { type: Date, require: true },
 });
 
-const Availability = mongoose.model<PersonAvailability>('Availability', availSchema)
-export Availability
+export const Availability = mongoose.model<PersonAvailability>('Availability', availSchema)
