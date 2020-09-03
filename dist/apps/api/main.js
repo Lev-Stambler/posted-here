@@ -92,22 +92,23 @@ module.exports = require("mongoose");
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("tslib");
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 const environment = {
     production: true,
+    DB: 'production',
     DB_USER: 'backend-prod',
     DB_PASSWORD: 'Q46XSpzmzufHocWG',
 };
 
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("tslib");
 
 /***/ }),
 /* 3 */
@@ -174,13 +175,13 @@ module.exports = __webpack_require__(9);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tslib__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
 /* harmony import */ var _app_models_markers_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 /* harmony import */ var _app_models_availability_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
 /* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4);
@@ -198,7 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * MONGO Connection
  */
-mongoose__WEBPACK_IMPORTED_MODULE_2__["connect"](`mongodb+srv://${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_USER}:${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_PASSWORD}@cluster0.bfyql.mongodb.net/development?retryWrites=true&w=majority`);
+mongoose__WEBPACK_IMPORTED_MODULE_2__["connect"](`mongodb+srv://${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_USER}:${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB_PASSWORD}@cluster0.bfyql.mongodb.net/${_environments_environment__WEBPACK_IMPORTED_MODULE_3__[/* environment */ "a"].DB}?retryWrites=true&w=majority`);
 const db = mongoose__WEBPACK_IMPORTED_MODULE_2__["connection"];
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {

@@ -10,7 +10,7 @@ import * as cors from 'cors'
 /**
  * MONGO Connection
  */
-mongoose.connect(`mongodb+srv://${environment.DB_USER}:${environment.DB_PASSWORD}@cluster0.bfyql.mongodb.net/development?retryWrites=true&w=majority`);
+mongoose.connect(`mongodb+srv://${environment.DB_USER}:${environment.DB_PASSWORD}@cluster0.bfyql.mongodb.net/${environment.DB}?retryWrites=true&w=majority`);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
