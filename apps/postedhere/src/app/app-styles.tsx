@@ -19,11 +19,3 @@ export const inputWrapperStyle = {
   width: '100%',
   padding: '1rem',
 };
-
-export const markerLabelStyle = {
-  background: 'white',
-  padding: '1rem',
-  maxWidth: '80px',
-  width: '80px',
-  boxSizing: 'border-box'
-} as React.CSSProperties

@@ -1,14 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-  GoogleMap,
-  withScriptjs,
-  withGoogleMap,
-  Marker,
-} from "react-google-maps";
+import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import "./map.css";
 import {
-  MarkerInfo,
   NewMarker,
   GetAllMarkers,
   PersonAvailability,
@@ -16,12 +10,16 @@ import {
   MarkerInfoAPI,
 } from "@postedhere/api-interfaces";
 import { markerAvail } from "@postedhere/calender";
-import {
-  overlayStyle,
-  inputWrapperStyle,
-  markerLabelStyle,
-} from "./app-styles";
-import { environment } from "../environments/environment";
+import { overlayStyle, inputWrapperStyle } from "../../app-styles";
+import { environment } from "../../../environments/environment";
+
+const markerLabelStyle = {
+  background: "white",
+  padding: "1rem",
+  maxWidth: "80px",
+  width: "80px",
+  boxSizing: "border-box",
+} as React.CSSProperties;
 
 function dateFromTime(time: string) {
   const date = new Date();
@@ -37,6 +35,13 @@ function dateFromTime(time: string) {
 }
 
 const baseUrl = environment.baseUrl;
+
+function formatDate(date: Date) {
+  const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
+  const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
+  const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
+  return `${mo} ${da}th ${ye}`;
+}
 
 function timeFromDate(date: Date) {
   function twoLong(n: number) {
@@ -137,7 +142,7 @@ const MapWithAMarker = withScriptjs<any>(
     const [markerSelectedInd, setmarkerSelectedInd] = useState(-1);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
-    function onMarkerClick(e) {
+    function onMapClick(e) {
       setLat(e.latLng.lat());
       setLng(e.latLng.lng());
       setNewMarkerVis(true);
@@ -153,21 +158,16 @@ const MapWithAMarker = withScriptjs<any>(
       <GoogleMap
         defaultZoom={18}
         defaultCenter={{ lat: 40.4427, lng: -79.943 }}
-        onClick={onMarkerClick}
+        onClick={onMapClick}
       >
-        <NewMarkerPopup
-          vis={newMarkerVis}
-          lat={lat}
-          lng={lng}
-          successClbk={() => window.location.reload()}
-        />
         {markers.map((marker, i) => {
           const avail = markerAvail(marker);
           return (
             <MarkerWithLabel
               labelStyle={{
                 ...markerLabelStyle,
-                display: avail === AvailableWhen.PAST ? 'none' : '',
+                zIndex: 1000,
+                display: avail === AvailableWhen.PAST ? "none" : "",
                 background:
                   avail === AvailableWhen.PRESENT
                     ? "green"
@@ -177,16 +177,44 @@ const MapWithAMarker = withScriptjs<any>(
               }}
               labelAnchor={{ x: 40, y: 80 }}
               key={`marker-${i}`}
+              onClick={(e) =>
+                alert(
+                  (marker.availabilities as PersonAvailability[])
+                    .map(
+                      (avail) =>
+                        `${avail.name} is available from ${timeFromDate(
+                          avail.startTime
+                        )} on ${formatDate(avail.startTime)} to ${timeFromDate(
+                          avail.endTime
+                        )} on ${formatDate(avail.endTime)}`
+                    )
+                    .join("\n")
+                )
+              }
               position={{ lat: marker.lat, lng: marker.lng }}
             >
-              <span onClick={() => {}}>
-                {(marker.availabilities as PersonAvailability[])
-                  .map((avail) => avail.name)
-                  .join(", ")}
+              <span>
+                {(marker.availabilities as PersonAvailability[]).map(
+                  (avail, j) => (
+                    <div
+                      key={`${marker}-i-avail-${j}`}
+                      style={{ display: "block" }}
+                    >
+                      <div style={{ cursor: "pointer" }}>{avail.name}</div>
+                    </div>
+                  )
+                )}
               </span>
             </MarkerWithLabel>
           );
         })}
+
+        <NewMarkerPopup
+          vis={newMarkerVis}
+          lat={lat}
+          lng={lng}
+          successClbk={() => window.location.reload()}
+        />
       </GoogleMap>
     );
   })
