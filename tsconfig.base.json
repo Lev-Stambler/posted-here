@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@postedhere/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@postedhere/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@postedhere/calender": ["libs/calender/src/index.ts"],
+      "@postedhere/avail": ["libs/avail/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,26 +1,34 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect } from "react";
 import {
   GoogleMap,
-  Marker,
   withScriptjs,
   withGoogleMap,
-} from 'react-google-maps';
+  Marker,
+} from "react-google-maps";
+import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
+import "./map.css";
 import {
   MarkerInfo,
   NewMarker,
   GetAllMarkers,
-} from '@postedhere/api-interfaces';
-import { overlayStyle, inputWrapperStyle } from './app-styles';
-import { environment } from '../environments/environment';
+  PersonAvailability,
+  AvailableWhen,
+  MarkerInfoAPI,
+} from "@postedhere/api-interfaces";
+import { markerAvail } from "@postedhere/calender";
+import {
+  overlayStyle,
+  inputWrapperStyle,
+  markerLabelStyle,
+} from "./app-styles";
+import { environment } from "../environments/environment";
 
 function dateFromTime(time: string) {
-  console.log(time);
   const date = new Date();
-  const times = time.split(':'); // replace with ":" for differently displayed time.
+  const times = time.split(":"); // replace with ":" for differently displayed time.
   const hours = times[0];
   const minutes = times[1];
 
-  console.log(parseInt(hours), parseInt(minutes));
   date.setHours(parseInt(hours));
   date.setMinutes(parseInt(minutes));
   date.setSeconds(0);
@@ -43,14 +51,14 @@ const NewMarkerPopup = (props: {
   lng: number;
   successClbk: () => void;
 }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   async function onSubmit() {
     const ret = await fetch(`${baseUrl}/marker`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         info: {
@@ -67,20 +75,20 @@ const NewMarkerPopup = (props: {
       } as NewMarker),
     });
     if (ret.status === 204) {
-      alert('Success!');
+      alert("Success!");
       props.successClbk();
     }
   }
 
   return (
-    <div style={{ display: `${props.vis ? 'grid' : 'none'}`, ...overlayStyle }}>
+    <div style={{ display: `${props.vis ? "grid" : "none"}`, ...overlayStyle }}>
       <div
         className="modal"
         style={{
-          background: 'white',
-          padding: '2rem',
-          display: 'grid',
-          justifyContent: 'start',
+          background: "white",
+          padding: "2rem",
+          display: "grid",
+          justifyContent: "start",
         }}
       >
         <p></p>
@@ -124,16 +132,17 @@ const NewMarkerPopup = (props: {
 
 const MapWithAMarker = withScriptjs<any>(
   withGoogleMap((props) => {
-    const [markers, setMarkers] = useState<MarkerInfo[]>([]);
+    const [markers, setMarkers] = useState<MarkerInfoAPI[]>([]);
     const [newMarkerVis, setNewMarkerVis] = useState(false);
+    const [markerSelectedInd, setmarkerSelectedInd] = useState(-1);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
     function onMarkerClick(e) {
       setLat(e.latLng.lat());
       setLng(e.latLng.lng());
       setNewMarkerVis(true);
-      // setMarkers([...markers, { lat, lng, people: [{ name: 'Lev' }] }]);
     }
+
     useEffect(() => {
       fetch(`${baseUrl}/all-markers`).then(async (ret) => {
         const body = (await ret.json()) as GetAllMarkers;
@@ -152,9 +161,32 @@ const MapWithAMarker = withScriptjs<any>(
           lng={lng}
           successClbk={() => window.location.reload()}
         />
-        {markers.map((marker) => (
-          <Marker position={{ lat: marker.lat, lng: marker.lng }} />
-        ))}
+        {markers.map((marker, i) => {
+          const avail = markerAvail(marker);
+          return (
+            <MarkerWithLabel
+              labelStyle={{
+                ...markerLabelStyle,
+                display: avail === AvailableWhen.PAST ? 'none' : '',
+                background:
+                  avail === AvailableWhen.PRESENT
+                    ? "green"
+                    : avail === AvailableWhen.FUTURE
+                    ? "grey"
+                    : "black",
+              }}
+              labelAnchor={{ x: 40, y: 80 }}
+              key={`marker-${i}`}
+              position={{ lat: marker.lat, lng: marker.lng }}
+            >
+              <span onClick={() => {}}>
+                {(marker.availabilities as PersonAvailability[])
+                  .map((avail) => avail.name)
+                  .join(", ")}
+              </span>
+            </MarkerWithLabel>
+          );
+        })}
       </GoogleMap>
     );
   })

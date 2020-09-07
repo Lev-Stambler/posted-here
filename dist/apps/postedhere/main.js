@@ -87,13 +87,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 function dateFromTime(time) {
-  console.log(time);
+  console.info(time);
   const date = new Date();
   const times = time.split(':'); // replace with ":" for differently displayed time.
 
   const hours = times[0];
   const minutes = times[1];
-  console.log(parseInt(hours), parseInt(minutes));
+  console.info(parseInt(hours), parseInt(minutes));
   date.setHours(parseInt(hours));
   date.setMinutes(parseInt(minutes));
   date.setSeconds(0);

@@ -11,7 +11,7 @@ export const overlayStyle = {
   background: '#c8c8c894',
   justifyContent: 'center',
   alignItems: 'center',
-  'z-index': 1000,
+  zIndex: 1000,
 } as React.CSSProperties;
 
 export const inputWrapperStyle = {
@@ -19,3 +19,11 @@ export const inputWrapperStyle = {
   width: '100%',
   padding: '1rem',
 };
+
+export const markerLabelStyle = {
+  background: 'white',
+  padding: '1rem',
+  maxWidth: '80px',
+  width: '80px',
+  boxSizing: 'border-box'
+} as React.CSSProperties

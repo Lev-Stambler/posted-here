@@ -1,15 +1,23 @@
 import * as mongoose from 'mongoose'
 
+export enum AvailableWhen {
+  PAST,
+  PRESENT,
+  FUTURE,
+}
+
 export interface PersonAvailability extends mongoose.Document {
   name: string;
   startTime: Date;
   endTime: Date;
 }
 
-export interface MarkerInfo extends mongoose.Document {
+export interface MarkerInfoAPI {
   lat: number;
   lng: number;
-  availabilities: PersonAvailability[] | string[] | mongoose.Schema.Types.ObjectId[];
+  availabilities: PersonAvailability[] | mongoose.Schema.Types.ObjectId[] | string[];
+}
+export interface MarkerInfo extends mongoose.Document, MarkerInfoAPI{
 }
 
 export interface Message {
@@ -25,5 +33,5 @@ export interface NewMarker {
 }
 
 export interface GetAllMarkers {
-  markerInfos: MarkerInfo[]
+  markerInfos: MarkerInfoAPI[]
 }

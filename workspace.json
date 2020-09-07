@@ -191,6 +191,60 @@
           }
         }
       }
+    },
+    "calender": {
+      "root": "libs/calender",
+      "sourceRoot": "libs/calender/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/calender/tsconfig.lib.json",
+              "libs/calender/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/calender/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/calender/jest.config.js",
+            "tsConfig": "libs/calender/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "avail": {
+      "root": "libs/avail",
+      "sourceRoot": "libs/avail/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/avail/tsconfig.lib.json",
+              "libs/avail/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/avail/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/avail/jest.config.js",
+            "tsConfig": "libs/avail/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -8904,10 +8904,10 @@ module.exports = bind;
  *
  * var objects = _.times(2, _.constant({ 'a': 1 }));
  *
- * console.log(objects);
+ * console.info(objects);
  * // => [{ 'a': 1 }, { 'a': 1 }]
  *
- * console.log(objects[0] === objects[1]);
+ * console.info(objects[0] === objects[1]);
  * // => true
  */
 function constant(value) {
@@ -8947,7 +8947,7 @@ var baseDelay = __webpack_require__(/*! ./_baseDelay */ "../../../node_modules/l
  * @example
  *
  * _.delay(function(text) {
- *   console.log(text);
+ *   console.info(text);
  * }, 1000, 'later');
  * // => Logs 'later' after one second.
  */
@@ -9041,12 +9041,12 @@ var arrayEach = __webpack_require__(/*! ./_arrayEach */ "../../../node_modules/l
  * @example
  *
  * _.forEach([1, 2], function(value) {
- *   console.log(value);
+ *   console.info(value);
  * });
  * // => Logs `1` then `2`.
  *
  * _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
- *   console.log(key);
+ *   console.info(key);
  * });
  * // => Logs 'a' then 'b' (iteration order is not guaranteed).
  */
@@ -9215,7 +9215,7 @@ module.exports = hasIn;
  *
  * var object = { 'a': 1 };
  *
- * console.log(_.identity(object) === object);
+ * console.info(_.identity(object) === object);
  * // => true
  */
 function identity(value) {
@@ -9976,10 +9976,10 @@ module.exports = reduce;
  *
  * var arrays = _.times(2, _.stubArray);
  *
- * console.log(arrays);
+ * console.info(arrays);
  * // => [[], []]
  *
- * console.log(arrays[0] === arrays[1]);
+ * console.info(arrays[0] === arrays[1]);
  * // => false
  */
 function stubArray() {
